@@ -76,7 +76,6 @@ alias blame="git blame"
 alias stash="git stash"
 alias stashapply="git stash apply"
 alias cherrypick="git cherry-pick"
-alias branch="echo $(parse_git_branch | sed 's/[)(]//g' | sed -e 's/[[:space:]]*$//')"
 
 #### GIT ####
 ## Git detailed output
