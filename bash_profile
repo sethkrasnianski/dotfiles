@@ -1,10 +1,6 @@
 # Allowing vim key binding
 set -o vi
 
-#### NVM ####
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 #### GENERAL PATHS ####
 export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
@@ -116,6 +112,10 @@ source "$HOME/google-cloud-sdk/completion.bash.inc" # bash completion
 #### Boot2Docker ####
 # $(boot2docker shellinit)
 alias boot2dockerup="DOCKER_TLS_VERIFY=1 DOCKER_HOST=tcp://192.168.59.103:2375 DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm boot2docker up"
+
+#### NVM ####
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 #### RVM ####
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
