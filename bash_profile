@@ -1,10 +1,6 @@
 # Allowing vim key binding
 set -o vi
 
-#### RVM ####
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 #### NVM ####
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -120,6 +116,10 @@ source "$HOME/google-cloud-sdk/completion.bash.inc" # bash completion
 #### Boot2Docker ####
 # $(boot2docker shellinit)
 alias boot2dockerup="DOCKER_TLS_VERIFY=1 DOCKER_HOST=tcp://192.168.59.103:2375 DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm boot2docker up"
+
+#### RVM ####
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 #### SDKman ####
 export SDKMAN_DIR="$HOME/.sdkman"
