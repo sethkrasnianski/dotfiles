@@ -329,6 +329,17 @@ layers configuration. You are free to put any user code."
   (setq org-startup-indented t)
   (setq org-replace-disputed-keys t)
   (prodigy-define-service
+    :name "Zeus"
+    :command "zeus-wrapper"
+    :args '("start")
+    :cwd "~/mojo/autoraptor")
+  (prodigy-define-service
+    :name "AutoRaptor: Zeus Server"
+    :command "zeus"
+    :args '("server")
+    :tags '(AR)
+    :cwd "~/mojo/autoraptor")
+  (prodigy-define-service
     :name "AutoRaptor: Rails Server"
     :command "rails"
     :args '("server")
