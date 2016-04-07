@@ -63,6 +63,12 @@ function gcf() {
   git checkout $(echo "$branch" | sed "s:.* remotes/origin/::" | sed "s:.* ::")
 
 }
+
+function push-up() {
+    branch=$(git branch | grep ^* | sed 's/* //')
+    git push --set-upstream origin $(echo branch)
+}
+
 #### RVM ####
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -91,6 +91,10 @@ function gcf() {
 
 }
 
+function push-up() {
+    git push --set-upstream origin $(git branch | grep ^* | sed 's/* //')
+}
+
 #### HELPER FUNCTIONS ####
 # run command n times
 run() {
