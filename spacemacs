@@ -345,7 +345,7 @@ layers configuration. You are free to put any user code."
     :command "npm"
     :args '("start")
     :tags '(Standup)
-    :cwd "~/mojo/standup-client"
+    :cwd "~/mojo/standup-web"
     :env '(("PORT" "3838")
            ("API_SERVER" "http://localhost:8888")))
   (prodigy-define-service
