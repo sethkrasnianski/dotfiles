@@ -320,6 +320,7 @@ layers configuration. You are free to put any user code."
   (evil-define-key 'visual evil-surround-mode-map "c" 'evilnc-comment-or-uncomment-lines)
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
+  (setq projectile-globally-ignored-directories '("Godeps"))
   (global-evil-surround-mode 1)
   (golden-ratio-mode 1)
   (global-auto-complete-mode)
