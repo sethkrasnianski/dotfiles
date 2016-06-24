@@ -336,8 +336,9 @@ layers configuration. You are free to put any user code."
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
   (prodigy-define-service
     :name "Zeus"
-    :command "zeus-wrapper"
+    :command "zeus"
     :args '("start")
+    :tags '(AR)
     :cwd "~/mojo/autoraptor")
   (prodigy-define-service
     :name "AutoRaptor: Zeus Server"
