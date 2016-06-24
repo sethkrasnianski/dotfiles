@@ -64,7 +64,8 @@ values."
                                       evil-nerd-commenter
                                       evil-exchange
                                       evil-surround
-                                      stylus-mode)
+                                      stylus-mode
+                                      minitest)
 
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(org-bullets
@@ -121,16 +122,16 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(brin
+   dotspacemacs-themes '(monokai
                          spacemacs-dark
+                         brin
                          zenburn
                          material
                          sanityinc-tomorrow-eighties
                          spacemacs-light
                          solarized-light
                          solarized-dark
-                         leuven
-                         monokai)
+                         leuven)
 
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -317,21 +318,27 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'turn-on-evil-mc-mode)
   (add-hook 'text-mode-hook 'turn-on-evil-mc-mode)
+  (add-hook 'react-mode-hook 'js2-mode-hide-warnings-and-errors)
   (evil-define-key 'visual evil-surround-mode-map "c" 'evilnc-comment-or-uncomment-lines)
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
-  (setq projectile-globally-ignored-directories '("Godeps"))
+  (setq projectile-globally-ignored-directories '("Godeps" "target" "public"))
+  (global-hl-line-mode -1)
   (global-evil-surround-mode 1)
-  (golden-ratio-mode 1)
+  (golden-ratio-mode -1)
   (global-auto-complete-mode)
   (setq org-agenda-include-diary t)
   (setq org-agenda-include-all-todo t)
   (setq org-startup-indented t)
   (setq org-replace-disputed-keys t)
+  (unless window-system
+    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
   (prodigy-define-service
     :name "Zeus"
-    :command "zeus-wrapper"
+    :command "zeus"
     :args '("start")
+    :tags '(AR)
     :cwd "~/mojo/autoraptor")
   (prodigy-define-service
     :name "AutoRaptor: Zeus Server"

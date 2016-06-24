@@ -6,8 +6,6 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH=/usr/local/sbin:$PATH
-export PATH=/usr/local/packer:$PATH
-export PATH=/usr/local/bin/ansible/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 export PGDATA=/usr/local/var/postgres
@@ -22,15 +20,20 @@ alias serve="python -m SimpleHTTPServer 3838"
 alias irc="irssi"
 alias lorem-ipsum="lorem-ipsum --units words --count 100 --copy --format html"
 alias vim="mvim -v"
+alias spacemacs="emacs -nw"
 
 ## TOOLS ##
+alias zt="zeus test"
+alias zc="zeus console"
+alias dbm="zeus rake db:migrate"
+alias dbmd="zeus rake db:migrate:down"
+alias dbmu="zeus rake db:migrate:up"
 alias ngrok="~/ngrok"
 alias to_json="python -m json.tool"
 alias tree="tree -I 'node_modules|bower_components'"
 
 ## Git ##
-alias pullgithub="git pull github" # pullgithub staging
-alias pushgithub="git push github" # pushgithub staging
+alias push-first="push-up; pullr -n" # Creates and pushes to upstream and opens PR
 alias pull="git pull" # pull staging
 alias push="git push" # push staging
 alias gcam="git commit -am" # gcam "yo cat"
@@ -60,7 +63,7 @@ alias grc="git rebase --continue" # continue on with the rebase
 alias grs="git rebase --skip" # ehhh skip it
 alias grA="git rebase --abort" # get out of there!!!
 alias grh="git reset head"
-alias grH="git reset head --hard"
+alias grH="git reset --hard"
 alias grh^="git reset head^"
 alias fetchgithub="git fetch github"
 alias fetch="git fetch"
@@ -88,7 +91,13 @@ function gcf() {
   branches=$(git branch -a) &&
   branch=$(echo "$branches" | fzf +s +m -e) &&
   git checkout $(echo "$branch" | sed "s:.* remotes/origin/::" | sed "s:.* ::")
+}
 
+function gbdf() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf +s +m -e) &&
+  gbD $(echo "$branch")
 }
 
 function push-up() {
@@ -109,23 +118,10 @@ run() {
 export LEIN_FAST_TRAMPOLINE=y
 alias cljsbuild="lein trampoline cljsbuild $@"
 
-#### Google Cloud SDK ####
-source "$HOME/google-cloud-sdk/path.bash.inc"
-source "$HOME/google-cloud-sdk/completion.bash.inc" # bash completion
-
 #### Boot2Docker ####
 # $(boot2docker shellinit)
 alias boot2dockerup="DOCKER_TLS_VERIFY=1 DOCKER_HOST=tcp://192.168.59.103:2375 DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm boot2docker up"
 
-#### NVM ####
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 #### RVM ####
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-#### SDKman ####
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
