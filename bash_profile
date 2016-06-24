@@ -23,6 +23,11 @@ alias vim="mvim -v"
 alias spacemacs="emacs -nw"
 
 ## TOOLS ##
+alias zt="zeus test"
+alias zc="zeus console"
+alias dbm="zeus rake db:migrate"
+alias dbmd="zeus rake db:migrate:down"
+alias dbmu="zeus rake db:migrate:up"
 alias ngrok="~/ngrok"
 alias to_json="python -m json.tool"
 alias tree="tree -I 'node_modules|bower_components'"
