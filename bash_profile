@@ -6,8 +6,6 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH=/usr/local/sbin:$PATH
-export PATH=/usr/local/packer:$PATH
-export PATH=/usr/local/bin/ansible/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 export PGDATA=/usr/local/var/postgres
@@ -29,8 +27,6 @@ alias to_json="python -m json.tool"
 alias tree="tree -I 'node_modules|bower_components'"
 
 ## Git ##
-alias pullgithub="git pull github" # pullgithub staging
-alias pushgithub="git push github" # pushgithub staging
 alias pull="git pull" # pull staging
 alias push="git push" # push staging
 alias gcam="git commit -am" # gcam "yo cat"
@@ -109,23 +105,10 @@ run() {
 export LEIN_FAST_TRAMPOLINE=y
 alias cljsbuild="lein trampoline cljsbuild $@"
 
-#### Google Cloud SDK ####
-source "$HOME/google-cloud-sdk/path.bash.inc"
-source "$HOME/google-cloud-sdk/completion.bash.inc" # bash completion
-
 #### Boot2Docker ####
 # $(boot2docker shellinit)
 alias boot2dockerup="DOCKER_TLS_VERIFY=1 DOCKER_HOST=tcp://192.168.59.103:2375 DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm boot2docker up"
 
-#### NVM ####
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 #### RVM ####
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-#### SDKman ####
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
