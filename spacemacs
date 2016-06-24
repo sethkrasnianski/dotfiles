@@ -122,16 +122,16 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(brin
+   dotspacemacs-themes '(monokai
                          spacemacs-dark
+                         brin
                          zenburn
                          material
                          sanityinc-tomorrow-eighties
                          spacemacs-light
                          solarized-light
                          solarized-dark
-                         leuven
-                         monokai)
+                         leuven)
 
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
