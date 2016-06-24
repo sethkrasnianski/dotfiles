@@ -91,7 +91,13 @@ function gcf() {
   branches=$(git branch -a) &&
   branch=$(echo "$branches" | fzf +s +m -e) &&
   git checkout $(echo "$branch" | sed "s:.* remotes/origin/::" | sed "s:.* ::")
+}
 
+function gbdf() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf +s +m -e) &&
+  gbD $(echo "$branch")
 }
 
 function push-up() {
