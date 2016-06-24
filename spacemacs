@@ -331,6 +331,9 @@ layers configuration. You are free to put any user code."
   (setq org-agenda-include-all-todo t)
   (setq org-startup-indented t)
   (setq org-replace-disputed-keys t)
+  (unless window-system
+    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
   (prodigy-define-service
     :name "Zeus"
     :command "zeus-wrapper"
