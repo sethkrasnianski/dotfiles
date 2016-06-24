@@ -20,6 +20,7 @@ alias serve="python -m SimpleHTTPServer 3838"
 alias irc="irssi"
 alias lorem-ipsum="lorem-ipsum --units words --count 100 --copy --format html"
 alias vim="mvim -v"
+alias spacemacs="emacs -nw"
 
 ## TOOLS ##
 alias ngrok="~/ngrok"
