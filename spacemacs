@@ -325,7 +325,7 @@ layers configuration. You are free to put any user code."
   (setq projectile-globally-ignored-directories '("Godeps" "target" "public"))
   (global-hl-line-mode -1)
   (global-evil-surround-mode 1)
-  (golden-ratio-mode 1)
+  (golden-ratio-mode -1)
   (global-auto-complete-mode)
   (setq org-agenda-include-diary t)
   (setq org-agenda-include-all-todo t)
