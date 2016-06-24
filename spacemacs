@@ -318,6 +318,7 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'turn-on-evil-mc-mode)
   (add-hook 'text-mode-hook 'turn-on-evil-mc-mode)
+  (add-hook 'react-mode-hook 'js2-mode-hide-warnings-and-errors)
   (evil-define-key 'visual evil-surround-mode-map "c" 'evilnc-comment-or-uncomment-lines)
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
