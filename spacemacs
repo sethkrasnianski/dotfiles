@@ -64,7 +64,8 @@ values."
                                       evil-nerd-commenter
                                       evil-exchange
                                       evil-surround
-                                      stylus-mode)
+                                      stylus-mode
+                                      minitest)
 
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(org-bullets
