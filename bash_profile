@@ -101,7 +101,11 @@ function gbdf() {
 }
 
 function push-up() {
-    git push --set-upstream origin $(git branch | grep ^* | sed 's/* //')
+    git push --set-upstream origin $(current-branch)
+}
+
+function current-branch() {
+  git branch | grep ^* | sed 's/* //'
 }
 
 #### HELPER FUNCTIONS ####
