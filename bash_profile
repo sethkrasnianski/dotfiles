@@ -35,7 +35,7 @@ alias tree="tree -I 'node_modules|bower_components'"
 ## Git ##
 alias push-first="push-up; pullr -n" # Creates and pushes to upstream and opens PR
 alias pull="git pull" # pull staging
-alias push="git push" # push staging
+alias push="git push origin $(current-branch)" # push staging
 alias gcam="git commit -am" # gcam "yo cat"
 alias gcm="git commit -m" # gcm "yo dawg"
 alias gcamd="git commit --amend" # amend the commit
@@ -101,7 +101,11 @@ function gbdf() {
 }
 
 function push-up() {
-    git push --set-upstream origin $(git branch | grep ^* | sed 's/* //')
+    git push --set-upstream origin $(current-branch)
+}
+
+function current-branch() {
+  git branch | grep ^* | sed 's/* //'
 }
 
 #### HELPER FUNCTIONS ####
