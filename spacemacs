@@ -18,6 +18,9 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     octave
+     sql
+     yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -33,6 +36,8 @@ values."
           org-enable-github-support t)
      javascript
      (ruby :variables ruby-version-manager 'rvm)
+     crystal
+     elixir
      emoji
      prodigy
      markdown
@@ -51,7 +56,7 @@ values."
      git
      github
      react
-     ruby-on-rails
+     ;;ruby-on-rails
      clojure
      go
      rust)
@@ -65,7 +70,8 @@ values."
                                       evil-exchange
                                       evil-surround
                                       stylus-mode
-                                      minitest)
+                                      minitest
+                                      hackernews)
 
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(org-bullets
