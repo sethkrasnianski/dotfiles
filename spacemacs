@@ -123,9 +123,10 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(monokai
-                         spacemacs-dark
-                         brin
                          zenburn
+                         brin
+                         spacemacs-dark
+                         apropospriate-dark
                          material
                          sanityinc-tomorrow-eighties
                          spacemacs-light
