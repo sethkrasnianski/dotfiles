@@ -350,6 +350,24 @@ layers configuration. You are free to put any user code."
     (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
   (prodigy-define-service
+    :name "mobile:client"
+    :command "yarn"
+    :args '("start")
+    :tags '(C)
+    :cwd "~/mojo/countr-mobile")
+  (prodigy-define-service
+    :name "web:client"
+    :command "npm"
+    :args '("run" "serve")
+    :tags '(C)
+    :cwd "~/mojo/countr/client")
+  (prodigy-define-service
+    :name "web:server"
+    :command "bundle"
+    :args '("exec" "rails" "s" "-b 0.0.0.0")
+    :tags '(C)
+    :cwd "~/mojo/countr")
+  (prodigy-define-service
     :name "Zeus"
     :command "zeus"
     :args '("start")
@@ -386,7 +404,37 @@ layers configuration. You are free to put any user code."
     :command "make"
     :args '("gin")
     :tags '(Standup)
-    :cwd "~/go/src/standup"))
+    :cwd "~/go/src/standup")
+  (prodigy-define-service
+    :name "Standup: WWW"
+    :command "npm"
+    :args '("start")
+    :tags '(Standup)
+    :cwd "~/mojo/standup-www")
+  (prodigy-define-service
+    :name "Applico: Web"
+    :command "npm"
+    :args '("start")
+    :tags '(Applico)
+    :cwd "~/Applico/web")
+  (prodigy-define-service
+    :name "www"
+    :command "npm"
+    :args '("start")
+    :tags '(www)
+    :cwd "~/www")
+  (prodigy-define-service
+    :name "cassias-api"
+    :command "npm"
+    :ards `("run" "watch")
+    :tags `(cassias)
+    :cwd "~/cassias/cassias-node/api")
+  (prodigy-define-service
+    :name "so-beautify"
+    :command "npm"
+    :args '("start")
+    :tags '(sob)
+    :cwd "~/Open Source/stack-overflow-beautify"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
