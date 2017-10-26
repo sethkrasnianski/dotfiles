@@ -284,6 +284,12 @@ values."
 (global-set-key (kbd "<C-S-down>") 'move-line-down)
 (global-set-key (kbd "<C-S-up>") 'move-line-up)
 
+(defun magit-seths-reset ()
+  "git reset HEAD^"
+  (interactive)
+  (shell-command "git reset HEAD^")
+    (magit-refresh))
+
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
@@ -307,10 +313,18 @@ in `dotspacemacs/user-config'."
    web-mode-enable-current-element-highlight t
    web-mode-comment-style 2)
 
+  (load-file "~/.spacemacs.d/prettier-js.el")
+  (require 'prettier-js)
+  (setq prettier-args '("--single-quote"))
+
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
-    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+
+  (with-eval-after-load 'magit
+    (define-key magit-status-mode-map
+      (kbd "M-p") 'magit-seths-reset)))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -319,10 +333,11 @@ layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'turn-on-evil-mc-mode)
   (add-hook 'text-mode-hook 'turn-on-evil-mc-mode)
   (add-hook 'react-mode-hook 'js2-mode-hide-warnings-and-errors)
+  (add-hook 'js2-mode-hook 'react-mode)
   (evil-define-key 'visual evil-surround-mode-map "c" 'evilnc-comment-or-uncomment-lines)
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
-  (setq projectile-globally-ignored-directories '("Godeps" "target" "public"))
+  (setq projectile-globally-ignored-directories '("Godeps" "target" "public" ".shards" "libs" "**/vendor/**" "node_modules"))
   (global-hl-line-mode -1)
   (global-evil-surround-mode 1)
   (golden-ratio-mode -1)
@@ -334,6 +349,24 @@ layers configuration. You are free to put any user code."
   (unless window-system
     (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+  (prodigy-define-service
+    :name "mobile:client"
+    :command "yarn"
+    :args '("start")
+    :tags '(C)
+    :cwd "~/mojo/countr-mobile")
+  (prodigy-define-service
+    :name "web:client"
+    :command "npm"
+    :args '("run" "serve")
+    :tags '(C)
+    :cwd "~/mojo/countr/client")
+  (prodigy-define-service
+    :name "web:server"
+    :command "bundle"
+    :args '("exec" "rails" "s" "-b 0.0.0.0")
+    :tags '(C)
+    :cwd "~/mojo/countr")
   (prodigy-define-service
     :name "Zeus"
     :command "zeus"
@@ -371,17 +404,73 @@ layers configuration. You are free to put any user code."
     :command "make"
     :args '("gin")
     :tags '(Standup)
-    :cwd "~/go/src/standup"))
+    :cwd "~/go/src/standup")
+  (prodigy-define-service
+    :name "Standup: WWW"
+    :command "npm"
+    :args '("start")
+    :tags '(Standup)
+    :cwd "~/mojo/standup-www")
+  (prodigy-define-service
+    :name "Applico: Web"
+    :command "npm"
+    :args '("start")
+    :tags '(Applico)
+    :cwd "~/Applico/web")
+  (prodigy-define-service
+    :name "www"
+    :command "npm"
+    :args '("start")
+    :tags '(www)
+    :cwd "~/www")
+  (prodigy-define-service
+    :name "cassias-api"
+    :command "npm"
+    :ards `("run" "watch")
+    :tags `(cassias)
+    :cwd "~/cassias/cassias-node/api")
+  (prodigy-define-service
+    :name "so-beautify"
+    :command "npm"
+    :args '("start")
+    :tags '(sob)
+    :cwd "~/Open Source/stack-overflow-beautify"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(electric-indent-mode nil)
+ '(js-indent-level 2 t)
+ '(js2-basic-offset 2 t)
+ '(js2-indent-switch-body nil)
  '(mac-font-panel-mode nil)
+ ;; '(magit-push-arguments (quote ("--force-with-lease")))
+ '(package-selected-packages
+   (quote
+    (winum unfill solarized-theme madhat2r-theme fuzzy flycheck-credo sql-indent php-auto-yasnippets drupal-mode phpunit phpcbf php-extras php-mode yaml-mode uuidgen pug-mode ox-gfm osx-dictionary org-projectile org-download ob-elixir org mwim livid-mode skewer-mode simple-httpd link-hint hide-comnt go-guru github-search magit-popup git-commit with-editor dash async marshal ht flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump darkokai-theme column-enforce-mode clojure-snippets cargo zonokai-theme zenburn-theme zen-and-art-theme xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme toml-mode toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stylus-mode stekene-theme spacemacs-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smooth-scrolling smeargle slim-mode shell-pop seti-theme scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reverse-theme reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters railscasts-theme racer quelpa purple-haze-theme projectile-rails professional-theme prodigy popwin planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el pbcopy pastels-on-dark-theme paradox page-break-lines osx-trash orgit organic-green-theme org-repo-todo org-present org-pomodoro org-plus-contrib open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme neotree naquadah-theme mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minitest minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls macrostep lush-theme lorem-ipsum linum-relative light-soap-theme leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jbeans-theme jazz-theme jade-mode ir-black-theme inkpot-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme hackernews gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio go-eldoc gnuplot github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md gandalf-theme flycheck-rust flycheck-pos-tip flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator feature-mode farmhouse-theme fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu espresso-theme eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dracula-theme django-theme diff-hl define-word darktooth-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme crystal-mode company-web company-tern company-statistics company-racer company-quickhelp company-go company-emoji colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode clues-theme clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby cherry-blossom-theme busybee-theme bundler buffer-move bubbleberry-theme bracketed-paste birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes alchemist aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(safe-local-variable-values
    (quote
-    ((eval when
+    ((eval add-hook
+           (quote react-mode-hook)
+           (lambda nil
+             (add-hook
+              (quote before-save-hook)
+              (quote prettier)
+              nil
+              (quote make-it-local))))
+     (eval add-hook
+           (quote js-mode-hook)
+           (lambda nil
+             (add-hook
+              (quote before-save-hook)
+              (quote prettier)
+              nil
+              (quote make-it-local))))
+     (elixir-enable-compilation-checking . t)
+     (elixir-enable-compilation-checking)
+     (eval when
            (fboundp
             (quote rainbow-mode))
            (rainbow-mode 1))
