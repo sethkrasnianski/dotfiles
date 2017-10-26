@@ -284,6 +284,12 @@ values."
 (global-set-key (kbd "<C-S-down>") 'move-line-down)
 (global-set-key (kbd "<C-S-up>") 'move-line-up)
 
+(defun magit-seths-reset ()
+  "git reset HEAD^"
+  (interactive)
+  (shell-command "git reset HEAD^")
+    (magit-refresh))
+
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
@@ -307,10 +313,18 @@ in `dotspacemacs/user-config'."
    web-mode-enable-current-element-highlight t
    web-mode-comment-style 2)
 
+  (load-file "~/.spacemacs.d/prettier-js.el")
+  (require 'prettier-js)
+  (setq prettier-args '("--single-quote"))
+
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
-    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+
+  (with-eval-after-load 'magit
+    (define-key magit-status-mode-map
+      (kbd "M-p") 'magit-seths-reset)))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -319,6 +333,7 @@ layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'turn-on-evil-mc-mode)
   (add-hook 'text-mode-hook 'turn-on-evil-mc-mode)
   (add-hook 'react-mode-hook 'js2-mode-hide-warnings-and-errors)
+  (add-hook 'js2-mode-hook 'react-mode)
   (evil-define-key 'visual evil-surround-mode-map "c" 'evilnc-comment-or-uncomment-lines)
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
