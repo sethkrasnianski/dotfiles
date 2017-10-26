@@ -34,7 +34,7 @@ alias tree="tree -I 'node_modules|bower_components'"
 
 ## Git ##
 alias push-first="push-up; pullr -n" # Creates and pushes to upstream and opens PR
-alias pull="git pull" # pull staging
+alias pull="git pull origin $(current-branch)" # pull staging
 alias push="git push origin $(current-branch)" # push staging
 alias gcam="git commit -am" # gcam "yo cat"
 alias gcm="git commit -m" # gcm "yo dawg"
@@ -107,6 +107,7 @@ function push-up() {
 function current-branch() {
   git branch | grep ^* | sed 's/* //'
 }
+
 
 #### HELPER FUNCTIONS ####
 # run command n times
