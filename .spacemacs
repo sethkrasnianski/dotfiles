@@ -349,6 +349,7 @@ layers configuration. You are free to put any user code."
   (global-evil-surround-mode 1)
   (golden-ratio-mode -1)
   (global-auto-complete-mode)
+  (setq projectile-enable-caching t)
   (setq org-agenda-include-diary t)
   (setq org-agenda-include-all-todo t)
   (setq org-startup-indented t)
