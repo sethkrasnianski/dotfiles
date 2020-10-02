@@ -11,7 +11,11 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
+# Setup docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
+# Install things
 apt-get update && apt-get upgrade
 sudo add-apt-repository ppa:kelleyk/emacs
 apt-get install -y emacs27 \
