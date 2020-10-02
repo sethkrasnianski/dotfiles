@@ -22,5 +22,8 @@ apt-get install -y emacs27 \
                    docker-ce \
                    docker-ce-cli \
                    containerd.io
-                   
+  
+# Conjure the force
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
 echo "Setup complete"
