@@ -1,0 +1,19 @@
+// Static tasks configuration.
+//
+// Example:
+[
+  // not used
+  {
+    "label": "magit",
+    // install gitu
+    // https://github.com/altsem/gitu/blob/master/docs/installing.md
+    "command": "GIT_EDITOR=\"zed -w\" gitu",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": true,
+    "reveal": "always",
+    "shell": {
+      "program": "/bin/zsh"
+    }
+  }
+]
